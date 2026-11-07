@@ -1,0 +1,41 @@
+const cartCount = document.getElementById("cartCount");
+const cartMessage = document.getElementById("cartMessage");
+
+let cartItems = 0;
+
+document.querySelectorAll(".quick-add").forEach(button => {
+  button.addEventListener("click", () => {
+    cartItems++;
+    cartCount.textContent = cartItems;
+    cartMessage.textContent =
+      `${button.dataset.name} added to your bag.`;
+  });
+});
+
+document.querySelectorAll(".filter").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelector(".filter.active")?.classList.remove("active");
+    button.classList.add("active");
+
+    const selected = button.dataset.filter;
+
+    document.querySelectorAll(".product-card").forEach(card => {
+      card.style.display =
+        selected === "all" || card.dataset.category === selected
+          ? "" : "none";
+    });
+  });
+});
+
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
+
+menuToggle.addEventListener("click", () => {
+  mainNav.classList.toggle("open");
+});
+
+mainNav.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    mainNav.classList.remove("open");
+  });
+});
